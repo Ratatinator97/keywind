@@ -12,10 +12,22 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: colors.blue,
+        primary: {
+          '50': '#ecefff',
+          '100': '#dde1ff',
+          '200': '#c2c9ff',
+          '300': '#9ca4ff',
+          '400': '#7675ff',
+          '500': '#7164ff',
+          '600': '#5536f5',
+          '700': '#492ad8',
+          '800': '#3b25ae',
+          '900': '#332689',
+          '950': '#201650',
+      },
         secondary: colors.gray,
-
         provider: {
+          pictalk: '#FF5757',
           bitbucket: '#0052CC',
           discord: '#5865F2',
           facebook: '#1877F2',
