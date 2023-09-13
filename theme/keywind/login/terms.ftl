@@ -7,7 +7,12 @@
   <#if section="header">
     ${msg("termsTitle")}
   <#elseif section="form">
+    <div class="overflow-auto h-56">
     ${kcSanitize(msg("termsText"))?no_esc}
+    </div>
+    <div class="overflow-auto h-56">
+    ${kcSanitize(msg("privacyText"))?no_esc}
+    </div>
     <@form.kw action=url.loginAction method="post">
       <@buttonGroup.kw>
         <@button.kw color="primary" name="accept" type="submit">
