@@ -2,24 +2,26 @@ version: '3.7'
 
 services:
   keycloak:
-    container_name: keycloak22
-    image: quay.io/keycloak/keycloak:23.0.4
+    container_name: keycloak
+    image: quay.io/keycloak/keycloak:latest
     volumes:
-      - ./theme:/opt/keycloak/themes:ro # this is for custom theme
+      - ./theme:/opt/keycloak/themes:ro
       - ./plugins:/opt/keycloak/providers:ro
-      - db-data1:/opt/keycloak/data
+      - db-data:/opt/keycloak/data
     environment:
       KEYCLOAK_ADMIN: keycloak
       KEYCLOAK_ADMIN_PASSWORD: password
+      KEYCLOAK_LOGLEVEL: DEBUG
     command:
       - start-dev
       - --spi-theme-static-max-age=-1
       - --spi-theme-cache-themes=false
       - --spi-theme-cache-templates=false
+      - --log-level=debug
     ports:
       - 8080:8080
       - 5432:5432/udp
       - 5432:5432
 
 volumes:
-  db-data1: {}
+  db-data: {}
