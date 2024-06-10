@@ -1,9 +1,6 @@
-const colors = require('tailwindcss/colors');
+import colors from 'tailwindcss/colors';
 
-/**
- * @type { import('tailwindcss').Config }
- */
-module.exports = {
+export default {
   content: ['./theme/**/*.ftl'],
   experimental: {
     optimizeUniversalDefaults: true,
@@ -12,22 +9,23 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          '50': '#ecefff',
-          '100': '#dde1ff',
-          '200': '#c2c9ff',
-          '300': '#9ca4ff',
-          '400': '#7675ff',
-          '500': '#7164ff',
-          '600': '#5536f5',
-          '700': '#492ad8',
-          '800': '#3b25ae',
-          '900': '#332689',
-          '950': '#201650',
+        primary:  {
+          '50': '#fff1f1',
+          '100': '#ffe1e1',
+          '200': '#ffc7c7',
+          '300': '#ffa0a0',
+          '400': '#ff5757',
+          '500': '#f83b3b',
+          '600': '#e51d1d',
+          '700': '#c11414',
+          '800': '#a01414',
+          '900': '#841818',
+          '950': '#480707',
       },
         secondary: colors.gray,
+
         provider: {
-          pictalk: '#FF5757',
+          apple: '#000000',
           bitbucket: '#0052CC',
           discord: '#5865F2',
           facebook: '#1877F2',

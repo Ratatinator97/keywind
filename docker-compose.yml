@@ -3,7 +3,7 @@ version: '3.7'
 services:
   keycloak:
     container_name: keycloak22
-    image: quay.io/keycloak/keycloak:23.0.4
+    image: quay.io/keycloak/keycloak:24.0
     volumes:
       - ./theme:/opt/keycloak/themes:ro # this is for custom theme
       - ./plugins:/opt/keycloak/providers:ro
