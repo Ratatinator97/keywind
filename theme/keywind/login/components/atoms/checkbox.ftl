@@ -13,7 +13,7 @@
       </#list>
     >
     <label class="ml-2 text-secondary-600 text-sm" for="${name}">
-      ${label}
+      ${label?no_esc}
     </label>
   </div>
 </#macro>
