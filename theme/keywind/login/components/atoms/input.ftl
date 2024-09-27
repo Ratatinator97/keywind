@@ -15,6 +15,7 @@
   type="text"
   rest...
 >
+<#if !hidden>
   <div>
     <label class="sr-only" for="${name}">
       ${label}
@@ -25,7 +26,6 @@
           <#if autofocus>autofocus</#if>
           <#if disabled>disabled</#if>
           <#if required>required</#if>
-          <#if hidden>hidden</#if>
 
           aria-invalid="${invalid?c}"
           class="${class}"
@@ -77,4 +77,11 @@
       </div>
     </#if>
   </div>
+  <#else>
+    <input type="hidden" id="${name}" name="${name}" 
+      <#list rest as attrName, attrValue>
+        ${attrName}="${attrValue}"
+      </#list>
+    >
+  </#if>
 </#macro>
