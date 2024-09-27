@@ -6,6 +6,7 @@
   autofocus=false
   class="block border-secondary-200 mt-1 rounded-md w-full focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 sm:text-sm"
   disabled=false
+  hidden=false
   invalid=false
   label=""
   message=""
@@ -24,12 +25,13 @@
           <#if autofocus>autofocus</#if>
           <#if disabled>disabled</#if>
           <#if required>required</#if>
+          <#if hidden>hidden</#if>
 
           aria-invalid="${invalid?c}"
           class="${class}"
           id="${name}"
           name="${name}"
-          placeholder="${label}"
+          placeholder="${label} <#if required>*</#if>"
           :type="show ? 'text' : 'password'"
 
           <#list rest as attrName, attrValue>
@@ -61,7 +63,7 @@
         class="${class}"
         id="${name}"
         name="${name}"
-        placeholder="${label}"
+        placeholder="${label} <#if required>*</#if>"
         type="${type}"
 
         <#list rest as attrName, attrValue>

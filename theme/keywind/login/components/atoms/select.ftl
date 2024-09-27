@@ -26,7 +26,7 @@
         ${attrName}="${attrValue}"
       </#list>
     >
-      <option value="" disabled selected="selected">${label}</option>
+      <option value="" disabled selected="selected">${label} <#if required>*</#if></option>
       <#list options as option>
         <option value="${option.value}">${option.label}</option>
       </#list>

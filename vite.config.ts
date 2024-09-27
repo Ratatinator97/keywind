@@ -10,9 +10,9 @@ export default defineConfig({
         'src/data/webAuthnRegister.ts',
       ],
       output: {
-        assetFileNames: '[name][extname]',
+        assetFileNames: '[name].[hash][extname]',
         dir: 'theme/keywind/login/resources/dist',
-        entryFileNames: '[name].js',
+        entryFileNames: '[name].[hash].js',
       },
     },
   },
