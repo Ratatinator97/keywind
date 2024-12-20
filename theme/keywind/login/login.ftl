@@ -72,12 +72,11 @@
     </#if>
   <#elseif section="info">
     <#if realm.password && realm.registrationAllowed && !registrationDisabled??>
-      <div class="text-center">
-        ${msg("noAccount")}
-        <@link.kw color="primary" href=url.registrationUrl>
-          ${msg("doRegister")}
-        </@link.kw>
-      </div>
+      <@buttonGroup.kw>
+          <@button.kw color="secondary" name="register" type="button" onClick="window.location.href='${url.registrationUrl}'">
+            ${msg("doRegister")}
+          </@button.kw>
+        </@buttonGroup.kw>
     </#if>
   <#elseif section="socialProviders">
     <#if realm.password && social.providers??>

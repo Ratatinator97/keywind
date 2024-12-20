@@ -1,4 +1,10 @@
-<#macro kw color="" component="button" size="" rest...>
+<#macro kw 
+  color="" 
+  component="button" 
+  size=""
+  disabled="false"
+  rest...
+>
   <#switch color>
     <#case "primary">
       <#assign colorClass="bg-primary-600 text-white focus:ring-primary-600 hover:bg-primary-700">
@@ -21,13 +27,27 @@
       <#assign sizeClass="px-4 py-2 text-sm">
   </#switch>
 
-  <${component}
-    class="${colorClass} ${sizeClass} flex justify-center relative rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-offset-2"
+  <#assign baseClass="flex justify-center relative rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-offset-2">
+  <#assign disabledClass="bg-gray-200 text-gray-400 cursor-not-allowed">
 
-    <#list rest as attrName, attrValue>
-      ${attrName}="${attrValue}"
-    </#list>
-  >
-    <#nested>
-  </${component}>
+  <#if disabled != "false">
+    <${component}
+      class="${baseClass} ${disabledClass} ${sizeClass}"
+      x-bind:disabled="${disabled}"
+      <#list rest as attrName, attrValue>
+        ${attrName}="${attrValue}"
+      </#list>
+    >
+      <#nested>
+    </${component}>
+  <#else>
+    <${component}
+      class="${baseClass} ${colorClass} ${sizeClass}"
+      <#list rest as attrName, attrValue>
+        ${attrName}="${attrValue}"
+      </#list>
+    >
+      <#nested>
+    </${component}>
+  </#if>
 </#macro>

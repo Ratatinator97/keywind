@@ -15,8 +15,43 @@
   <#if section="header">
     ${msg("registerTitle")}
     <#elseif section="form">
-      <div x-data="{ step: 1 }">
-        <@form.kw action=url.registrationAction method="post">
+      <div x-data="{ 
+        step: 1,
+        formValid: false,
+        validateForm() {
+          if (this.step === 1) {
+            const inputs = document.querySelectorAll('input[required]');
+            const password = document.getElementById('password')?.value || '';
+            const passwordConfirm = document.getElementById('password-confirm')?.value || '';
+            const passwordsMatch = password === passwordConfirm && password !== '';
+            
+            const inputsValid = Array.from(inputs).every(input => {
+              const inputComponent = input.closest('[x-data]');
+              if (!inputComponent) return input.value.length > 0;
+              
+              const errorState = inputComponent.__x?.data?.error ?? false;
+              return !errorState && input.value.length > 0;
+            });
+            
+            this.formValid = inputsValid && passwordsMatch;
+          } else if (this.step === 2) {
+            const sourceMedium = document.querySelector('select[name=\'sourceMedium\']')?.value;
+            const userType = document.querySelector('select[name=\'userType\']')?.value;
+            
+            const termsAccepted = document.querySelector('input[name=\'termsAccepted\']')?.checked;
+            const marketingOptIn = document.querySelector('input[name=\'marketingOptIn\']')?.checked;
+            const analyticsConsent = document.querySelector('input[name=\'analyticsConsent\']')?.checked;
+            
+            this.formValid = 
+              sourceMedium && 
+              userType && 
+              termsAccepted && 
+              marketingOptIn && 
+              analyticsConsent;
+          }
+        }
+      }">
+        <@form.kw action=url.registrationAction method="post" @input="validateForm()">
           <!-- Step 1: Basic Information -->
           <div class="flex gap-2 justify-between h-2 w-full">
             <div class="h-full bg-primary-600 grow rounded-sm"></div>
@@ -77,7 +112,13 @@
                   type="password" />
               </#if>
             </div>
-            <@button.kw color="primary" type="button" class="my-2" @click="step = 2;">
+            <@button.kw 
+              color="primary" 
+              type="button" 
+              class="my-2" 
+              @click="step = 2; validateForm();" 
+              disabled="!formValid"
+            >
             ${msg("continue")}
           </@button.kw>
           </div>
@@ -124,10 +165,10 @@
               </#if>
             </div>
             <@buttonGroup.kw>
-              <@button.kw color="primary" type="submit">
+              <@button.kw disabled="!formValid" color="primary" type="submit">
                 ${msg("doRegister")}
               </@button.kw>
-              <@button.kw color="secondary" type="button" @click="step = 1">
+              <@button.kw  color="secondary" type="button" @click="step = 1">
                 ${msg("back")}
               </@button.kw>
             </@buttonGroup.kw>
