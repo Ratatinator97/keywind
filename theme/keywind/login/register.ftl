@@ -100,6 +100,7 @@
                   autocomplete="new-password"
                   invalid=messagesPerField.existsError("password", "password-confirm" )
                   label=msg("password")
+                  showPasswordIndicators=true
                   message=kcSanitize(messagesPerField.getFirstError("password", "password-confirm" ))
                   name="password"
                   type="password" />
@@ -107,6 +108,7 @@
                   autocomplete="new-password"
                   invalid=messagesPerField.existsError("password-confirm")
                   label=msg("passwordConfirm")
+                  showPasswordIndicators=true
                   message=kcSanitize(messagesPerField.get("password-confirm"))
                   name="password-confirm"
                   type="password" />

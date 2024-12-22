@@ -18,6 +18,7 @@
 >
   <#if section="header">
     ${msg("loginAccountTitle")}
+    <p class="text-sm mt-2">${msg("loginAccountText")}</p>
   <#elseif section="form">
     <#if realm.password>
       <@form.kw

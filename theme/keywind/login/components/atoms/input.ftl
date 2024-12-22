@@ -15,6 +15,7 @@
   required=true
   type="text"
   validationRules=""
+  showPasswordIndicators=false
   rest...
 >
 <#if !hidden>
@@ -125,7 +126,7 @@
       </div>
       </#if>
     </div>
-    <#if type == "password">
+    <#if type == "password" && showPasswordIndicators>
       <#if name == "password-confirm">
         <div class="flex items-center p-4 gap-2 mt-1 text-xs">
           <div :class="value === document.getElementById('password').value && value !== '' ? 'text-green-600' : 'text-gray-500'">
