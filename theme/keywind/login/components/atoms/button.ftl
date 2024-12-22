@@ -1,46 +1,67 @@
 <#macro kw 
   color="" 
-  component="button" 
+  component="button"
   size=""
-  disabled="false"
+  disabled=""
   rest...
 >
   <#switch color>
     <#case "primary">
-      <#assign colorClass="bg-primary-600 text-white focus:ring-primary-600 hover:bg-primary-700">
+      <#assign colorClass = "bg-primary-600 text-white focus:ring-primary-600 hover:bg-primary-700">
       <#break>
     <#case "secondary">
-      <#assign colorClass="bg-secondary-100 text-secondary-600 focus:ring-secondary-600 hover:bg-secondary-200 hover:text-secondary-900">
+      <#assign colorClass = "bg-secondary-100 text-secondary-600 focus:ring-secondary-600 hover:bg-secondary-200 hover:text-secondary-900">
       <#break>
     <#default>
-      <#assign colorClass="bg-primary-600 text-white focus:ring-primary-600 hover:bg-primary-700">
+      <#assign colorClass = "bg-primary-600 text-white focus:ring-primary-600 hover:bg-primary-700">
   </#switch>
 
   <#switch size>
     <#case "medium">
-      <#assign sizeClass="px-4 py-2 text-sm">
+      <#assign sizeClass = "px-4 py-2 text-sm">
       <#break>
     <#case "small">
-      <#assign sizeClass="px-2 py-1 text-xs">
+      <#assign sizeClass = "px-2 py-1 text-xs">
       <#break>
     <#default>
-      <#assign sizeClass="px-4 py-2 text-sm">
+      <#assign sizeClass = "px-4 py-2 text-sm">
   </#switch>
 
-  <#assign baseClass="flex justify-center relative rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-offset-2">
-  <#assign disabledClass="bg-gray-200 text-gray-400 cursor-not-allowed">
+  <#assign baseClass     = "flex justify-center relative rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-offset-2">
+  <#assign disabledClass = "bg-gray-200 text-gray-400 cursor-not-allowed">
 
-  <${component}
-    class="${baseClass} ${sizeClass}"
-    :class="{
-      '${disabledClass}': ${disabled?no_esc}, 
-      '${colorClass}': !${disabled?no_esc}
-    }"
-    x-bind:disabled="${disabled?no_esc}"
-    <#list rest as attrName, attrValue>
-      ${attrName}="${attrValue}"
-    </#list>
-  >
-    <#nested>
-  </${component}>
+  <#if disabled?? && disabled != "">
+    <!-- 
+      ALPINE MODE:
+      - We assume 'disabled' is an Alpine expression
+      - We generate dynamic classes + x-bind:disabled
+    -->
+    <${component}
+      class="${baseClass} ${sizeClass}"
+      :class="{
+        '${disabledClass}': ${disabled?no_esc},
+        '${colorClass}': !${disabled?no_esc}
+      }"
+      x-bind:disabled="${disabled?no_esc}"
+      <#list rest as attrName, attrValue>
+        ${attrName}="${attrValue}"
+      </#list>
+    >
+      <#nested>
+    </${component}>
+  <#else>
+    <!-- 
+      STATIC MODE:
+      - 'disabled' not given (or empty) => Always apply 'colorClass' 
+      - No Alpine reactivity 
+    -->
+    <${component}
+      class="${baseClass} ${colorClass} ${sizeClass}"
+      <#list rest as attrName, attrValue>
+        ${attrName}="${attrValue}"
+      </#list>
+    >
+      <#nested>
+    </${component}>
+  </#if>
 </#macro>

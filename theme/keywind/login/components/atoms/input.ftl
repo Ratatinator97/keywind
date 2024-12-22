@@ -68,6 +68,7 @@
             <#if required>required</#if>
             x-model="value"
             @blur="validate()"
+            autocomplete="on"
             :class="{'border-red-300 focus:border-red-300 focus:ring-red-200': error || ${invalid?c},
                     'border-gray-300 focus:border-primary-300 focus:ring-primary-200': !error && !${invalid?c}}"
             class="${class} pr-10 focus:ring focus:ring-opacity-50"
