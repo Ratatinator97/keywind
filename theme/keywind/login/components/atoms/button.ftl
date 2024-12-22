@@ -30,24 +30,17 @@
   <#assign baseClass="flex justify-center relative rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-offset-2">
   <#assign disabledClass="bg-gray-200 text-gray-400 cursor-not-allowed">
 
-  <#if disabled != "false">
-    <${component}
-      class="${baseClass} ${disabledClass} ${sizeClass}"
-      x-bind:disabled="${disabled}"
-      <#list rest as attrName, attrValue>
-        ${attrName}="${attrValue}"
-      </#list>
-    >
-      <#nested>
-    </${component}>
-  <#else>
-    <${component}
-      class="${baseClass} ${colorClass} ${sizeClass}"
-      <#list rest as attrName, attrValue>
-        ${attrName}="${attrValue}"
-      </#list>
-    >
-      <#nested>
-    </${component}>
-  </#if>
+  <${component}
+    class="${baseClass} ${sizeClass}"
+    :class="{
+      '${disabledClass}': ${disabled?no_esc}, 
+      '${colorClass}': !${disabled?no_esc}
+    }"
+    x-bind:disabled="${disabled?no_esc}"
+    <#list rest as attrName, attrValue>
+      ${attrName}="${attrValue}"
+    </#list>
+  >
+    <#nested>
+  </${component}>
 </#macro>
