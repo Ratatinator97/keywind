@@ -7,7 +7,7 @@
 <#import "components/atoms/link.ftl" as link>
 <#import "components/molecules/identity-provider.ftl" as identityProvider>
 <#import "features/labels/username.ftl" as usernameLabel>
-
+<#assign privacyUrl = "https://www.pictalk.org/" + locale.currentLanguageTag + "/privacy-policy">
 <#assign usernameLabel><@usernameLabel.kw /></#assign>
 
 <@layout.registrationLayout
@@ -87,6 +87,9 @@
           </@button.kw>
         </@buttonGroup.kw>
     </#if>
+    <div class="mt-4 text-center">
+      ${msg("privacyPolicy", "<a href='" + privacyUrl + "' target='_blank' class='text-primary-600 hover:underline'>" + msg("here") + "</a>")?no_esc}
+    </div>
   <#elseif section="socialProviders">
     <#if realm.password && social.providers??>
       <@identityProvider.kw providers=social.providers />
