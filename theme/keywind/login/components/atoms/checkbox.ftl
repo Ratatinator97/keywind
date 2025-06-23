@@ -1,4 +1,4 @@
-<#macro kw checked=false label="" name="" rest...>
+<#macro kw checked=false label="" name="" required=false rest...>
   <div class="flex items-center">
     <input
       <#if checked>checked</#if>
@@ -14,6 +14,9 @@
     >
     <label class="ml-2 text-secondary-600 text-sm" for="${name}">
       ${label?no_esc}
+      <#if required>
+        <span class="text-red-500">*</span>
+      </#if>
     </label>
   </div>
 </#macro>

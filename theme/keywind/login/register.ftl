@@ -42,12 +42,7 @@
             const marketingOptIn = document.querySelector('input[name=\'marketingOptIn\']')?.checked;
             const analyticsConsent = document.querySelector('input[name=\'analyticsConsent\']')?.checked;
             
-            this.formValid = 
-              sourceMedium && 
-              userType && 
-              termsAccepted && 
-              marketingOptIn && 
-              analyticsConsent;
+            this.formValid = termsAccepted;
           }
         }
       }">
@@ -131,7 +126,7 @@
               <@select.kw
                 label=msg("sourceMedium")
                 name="sourceMedium"
-                required=true
+                required=false
                 options=[
                 {"value": "search", "label": msg("search")},
                 {"value": "social", "label": msg("social")},
@@ -141,7 +136,7 @@
               <@select.kw
                 label=msg("userType")
                 name="userType"
-                required=true
+                required=false
                 options=[
                 {"value": "parent", "label": msg("parent")},
                 {"value": "liberal", "label": msg("liberal")},
@@ -153,15 +148,19 @@
               <@checkbox.kw
                 label=msg("termsAccepted", "<a href='" + termsUrl + "' target='_blank' class='text-primary-600 hover:underline'>" + msg("terms") + "</a>" , "<a href='" + privacyUrl + "' target='_blank' class='text-primary-600 hover:underline'>" + msg("privacy") + "</a>" )
                 name="termsAccepted"
-                required="required" />
+                required=true />
               <@checkbox.kw
                 label=msg("marketingOptIn")
                 name="marketingOptIn"
-                checked=true />
+                checked=true
+                required=false
+                 />
               <@checkbox.kw
                 label=msg("analyticsConsent")
                 name="analyticsConsent"
-                checked=true />
+                checked=true 
+                required=false
+                />
               <#if recaptchaRequired??>
                 <div class="g-recaptcha" data-sitekey="${recaptchaSiteKey}" data-size="compact"></div>
               </#if>
