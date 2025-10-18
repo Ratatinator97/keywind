@@ -39,8 +39,7 @@
             const userType = document.querySelector('select[name=\'userType\']')?.value;
             
             const termsAccepted = document.querySelector('input[name=\'termsAccepted\']')?.checked;
-            const marketingOptIn = document.querySelector('input[name=\'marketingOptIn\']')?.checked;
-            const analyticsConsent = document.querySelector('input[name=\'analyticsConsent\']')?.checked;
+            const marketingOptIn = document.querySelector('input[name=\'marketingOptIn\']')?.value;
             
             this.formValid = termsAccepted;
           }
@@ -126,7 +125,6 @@
               <@select.kw
                 label=msg("sourceMedium")
                 name="sourceMedium"
-                required=false
                 options=[
                 {"value": "search", "label": msg("search")},
                 {"value": "social", "label": msg("social")},
@@ -136,7 +134,6 @@
               <@select.kw
                 label=msg("userType")
                 name="userType"
-                required=false
                 options=[
                 {"value": "parent", "label": msg("parent")},
                 {"value": "liberal", "label": msg("liberal")},
@@ -153,14 +150,7 @@
                 label=msg("marketingOptIn")
                 name="marketingOptIn"
                 checked=true
-                required=false
                  />
-              <@checkbox.kw
-                label=msg("analyticsConsent")
-                name="analyticsConsent"
-                checked=true 
-                required=false
-                />
               <#if recaptchaRequired??>
                 <div class="g-recaptcha" data-sitekey="${recaptchaSiteKey}" data-size="compact"></div>
               </#if>

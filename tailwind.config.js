@@ -1,7 +1,10 @@
 import colors from 'tailwindcss/colors';
 
 export default {
-  content: ['./theme/**/*.ftl'],
+  content: ['./theme/**/*.ftl',
+    './src/**/*.{ftl,html,js,ts}',
+    './resources/**/*.{ftl,html,js,ts}',
+  ],
   experimental: {
     optimizeUniversalDefaults: true,
   },
@@ -10,17 +13,17 @@ export default {
     extend: {
       colors: {
         primary:  {
-          '50': '#fff1f1',
-          '100': '#ffe1e1',
-          '200': '#ffc7c7',
-          '300': '#ffa0a0',
-          '400': '#ff5757',
-          '500': '#f83b3b',
-          '600': '#e51d1d',
-          '700': '#c11414',
-          '800': '#a01414',
-          '900': '#841818',
-          '950': '#480707',
+          '50': '#fef4f2',
+          '100': '#fef4f2',
+          '200': '#fde8e3',
+          '300': '#fcd5cc',
+          '400': '#f9b7a8',
+          '500': '#f38d76',
+          '600': '#e75b3c',
+          '700': '#d54b2d',
+          '800': '#b33c22',
+          '900': '#943520',
+          '950': '#7b3121',
       },
         secondary: colors.gray,
 
