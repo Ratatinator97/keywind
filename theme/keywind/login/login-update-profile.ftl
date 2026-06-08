@@ -48,7 +48,7 @@
                 type="email"
                 value=(user.email!'')
             />
-            <input type="hidden" id="user.attributes.locale" name="user.attributes.locale" value="${locale.currentLanguageTag}">
+            <input type="hidden" id="user.attributes.locale" name="user.attributes.locale" value="${(lang)!"en"}">
             <!-- Additional fields -->
             <@select.kw
                 label=msg("userType")

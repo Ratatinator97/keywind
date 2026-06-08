@@ -12,6 +12,9 @@
     <#case "secondary">
       <#assign colorClass = "bg-secondary-100 text-secondary-600 focus:ring-secondary-600 hover:bg-secondary-200 hover:text-secondary-900">
       <#break>
+    <#case "outline">
+      <#assign colorClass = "bg-transparent text-primary-600 border-2 border-primary-600 focus:ring-primary-600 hover:bg-primary-600 hover:text-white transition-colors duration-200">
+      <#break>
     <#default>
       <#assign colorClass = "bg-primary-600 text-white focus:ring-primary-600 hover:bg-primary-700">
   </#switch>

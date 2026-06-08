@@ -6,8 +6,8 @@
 <#import "components/atoms/link.ftl" as link>
 <#import "components/atoms/select.ftl" as select>
 <#import "components/atoms/checkbox.ftl" as checkbox>
-<#assign termsUrl = "https://www.pictalk.org/" + locale.currentLanguageTag + "/terms-of-use">
-<#assign privacyUrl = "https://www.pictalk.org/" + locale.currentLanguageTag + "/privacy-policy">
+<#assign termsUrl = "https://www.pictalk.org/" + (lang)!"en" + "/terms-of-use">
+<#assign privacyUrl = "https://www.pictalk.org/" + (lang)!"en" + "/privacy-policy">
 <@layout.registrationLayout
   displayMessage=messagesPerField.exists('global')
   displayRequiredFields=false;
@@ -18,18 +18,18 @@
   <#elseif section="form">
     <@form.kw action=url.loginAction method="post">
         <@input.kw
-          hidden=(user.getEmail()?has_content)
+          hidden=((user.email)!''?has_content)
           autocomplete="email"
           invalid=messagesPerField.existsError("email")
           label=msg("email")
           message=kcSanitize(messagesPerField.get("email"))
           name="email"
           type="email"
-          value=(user.getEmail())!''
+          value=(user.email)!''
         />
   
       <@input.kw
-        hidden=(user.getFirstName()?has_content)
+        hidden=((user.firstName)!''?has_content)
         autocomplete="given-name"
         autofocus=true
         invalid=messagesPerField.existsError("firstName")
@@ -37,17 +37,17 @@
         message=kcSanitize(messagesPerField.get("firstName"))
         name="firstName"
         type="text"
-        value=(user.getFirstName())!''
+        value=(user.firstName)!''
       />
       <@input.kw
-        hidden=(user.getLastName()?has_content)
+        hidden=((user.lastName)!''?has_content)
         autocomplete="family-name"
         invalid=messagesPerField.existsError("lastName")
         label=msg("lastName")
         message=kcSanitize(messagesPerField.get("lastName"))
         name="lastName"
         type="text"
-        value=(user.getLastName())!''
+        value=(user.lastName)!''
       />
       <@select.kw
         label=msg("sourceMedium")
@@ -70,11 +70,11 @@
         {"value": "school", "label": msg("school")},
         {"value": "other", "label": msg("other")}
         ] />
-      <input type="hidden" id="user.attributes.locale" name="user.attributes.locale" value="${locale.currentLanguageTag}">
+      <input type="hidden" id="user.attributes.locale" name="user.attributes.locale" value="${(lang)!"en"}">
       <@checkbox.kw
         label=msg("termsAccepted", "<a href='" + termsUrl + "' target='_blank' class='text-primary-600 hover:underline'>" + msg("terms") + "</a>" , "<a href='" + privacyUrl + "' target='_blank' class='text-primary-600 hover:underline'>" + msg("privacy") + "</a>" )
         name="termsAccepted"
-        required="required" />
+        required=true />
       <@checkbox.kw
         label=msg("marketingOptIn")
         name="marketingOptIn"
@@ -91,7 +91,7 @@
           message=kcSanitize(messagesPerField.get("username"))
           name="username"
           type="text"
-          value=(user.getUsername())!''
+          value=(user.username)!''
         />
       </#if>
 

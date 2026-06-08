@@ -98,17 +98,31 @@ You can update Keywind components in your own child theme. For example, create a
 </#macro>
 ```
 
-## Build
+## Development
 
-When you're ready to deploy your own theme, run the build command to generate a static production build.
+Use this flow while editing templates, Tailwind classes, or theme assets:
 
 ```bash
 pnpm install
 pnpm build
+mvn clean package
+docker compose up --build
 ```
 
-To deploy a theme as an archive, create a JAR archive with the theme resources.
+`pnpm build` regenerates the compiled Tailwind CSS and updates the hashed asset references under `theme/keywind/login/resources/dist`. Run it whenever you add or rename Tailwind classes in FreeMarker templates or update `tailwind.config.js`.
+
+`mvn clean package` runs the FreeMarker template test suite and packages the theme sources into a JAR.
+
+`docker compose up --build` starts Keycloak with the local theme mounted from this repository and rebuilds the container image so custom providers from `plugins/` are baked in.
+
+## Production
+
+Before creating a deployable artifact, run the same build and validation steps:
 
 ```bash
-pnpm build:jar
+pnpm build
+mvn clean package
+docker compose up --build
 ```
+
+For production use, make sure the generated theme assets are committed or packaged with your release, and use the Docker image built by Compose so provider JARs are installed during the Keycloak image build.

@@ -6,8 +6,8 @@
 <#import "components/atoms/input.ftl" as input>
 <#import "components/atoms/link.ftl" as link>
 <#import "components/atoms/select.ftl" as select>
-<#assign termsUrl = "https://www.pictalk.org/" + locale.currentLanguageTag + "/terms-of-use">
-<#assign privacyUrl = "https://www.pictalk.org/" + locale.currentLanguageTag + "/privacy-policy">
+<#assign termsUrl = "https://www.pictalk.org/" + (lang)!"en" + "/terms-of-use">
+<#assign privacyUrl = "https://www.pictalk.org/" + (lang)!"en" + "/privacy-policy">
 <@layout.registrationLayout
   displayMessage=!messagesPerField.existsError("firstName", "lastName" , "email" , "username" , "password" , "password-confirm" )
   ;
@@ -141,7 +141,7 @@
                 {"value": "school", "label": msg("school")},
                 {"value": "other", "label": msg("other")}
                 ] />
-              <input type="hidden" id="user.attributes.locale" name="user.attributes.locale" value="${locale.currentLanguageTag}">
+              <input type="hidden" id="user.attributes.locale" name="user.attributes.locale" value="${(lang)!"en"}">
               <@checkbox.kw
                 label=msg("termsAccepted", "<a href='" + termsUrl + "' target='_blank' class='text-primary-600 hover:underline'>" + msg("terms") + "</a>" , "<a href='" + privacyUrl + "' target='_blank' class='text-primary-600 hover:underline'>" + msg("privacy") + "</a>" )
                 name="termsAccepted"

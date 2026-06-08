@@ -7,7 +7,7 @@
 <#import "components/atoms/link.ftl" as link>
 <#import "components/molecules/identity-provider.ftl" as identityProvider>
 <#import "features/labels/username.ftl" as usernameLabel>
-<#assign privacyUrl = "https://www.pictalk.org/" + locale.currentLanguageTag + "/privacy-policy">
+<#assign privacyUrl = "https://www.pictalk.org/" + (lang)!"en" + "/privacy-policy">
 <#assign usernameLabel><@usernameLabel.kw /></#assign>
 
 <@layout.registrationLayout
@@ -18,7 +18,6 @@
 >
   <#if section="header">
     ${msg("loginAccountTitle")}
-    <p class="text-sm mt-2">${msg("loginAccountText")}</p>
     <#if messagesPerField.existsError("username", "password")>
       <div class="bg-red-100 text-red-600 p-4 rounded-lg mt-2 flex items-center justify-center">
         <svg class="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -77,17 +76,38 @@
             ${msg("doLogIn")}
           </@button.kw>
         </@buttonGroup.kw>
+        <@buttonGroup.kw>
+          <@button.kw color="secondary" name="login" type="submit">
+            <span class="inline-flex items-center gap-3">
+              <span>${msg("migrateFromPictalkAAC")}</span>
+              <span class="bg-white rounded-full p-1 flex items-center justify-center">
+                <svg
+                  aria-hidden="true"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 64 64"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)" fill="#fc5859" stroke="none">
+                    <path d="M220 523 c-8 -2 -34 -11 -58 -20 l-43 -15 3 -169 c3 -173 9 -196 44 -182 16 6 34 57 34 97 0 28 6 34 49 54 27 12 56 34 66 48 38 58 28 149 -18 172 -31 15 -60 21 -77 15z m38 -115 c2 -18 -4 -31 -20 -42 -12 -9 -26 -16 -30 -16 -13 0 -9 78 5 83 25 11 42 1 45 -25z"/>
+                    <path d="M377 314 c-14 -14 -7 -66 13 -91 11 -14 17 -30 14 -37 -3 -6 5 1 18 17 21 24 31 27 81 27 l58 0 -3 43 -3 42 -85 3 c-47 1 -89 0 -93 -4z m173 -24 c0 -6 -33 -10 -80 -10 -47 0 -80 4 -80 10 0 6 33 10 80 10 47 0 80 -4 80 -10z m-2 -32 c-3 -7 -23 -14 -46 -16 -33 -2 -42 0 -42 12 0 12 11 16 46 16 32 0 44 -4 42 -12z"/>
+                  </g>
+                </svg>
+              </span>
+            </span>
+          </@button.kw>
+        </@buttonGroup.kw>
       </@form.kw>
     </#if>
   <#elseif section="info">
     <#if realm.password && realm.registrationAllowed && !registrationDisabled??>
       <@buttonGroup.kw>
-          <@button.kw color="secondary" name="register" type="button" onClick="window.location.href='${url.registrationUrl}'">
+          <@button.kw color="outline" name="register" type="button" onClick="window.location.href='${url.registrationUrl}'">
             ${msg("doRegister")}
           </@button.kw>
         </@buttonGroup.kw>
     </#if>
-    <div class="mt-4 text-center">
+    <div class="mt-4 text-center" style="font-style: italic;">
       ${msg("privacyPolicy", "<a href='" + privacyUrl + "' target='_blank' class='text-primary-600 hover:underline'>" + msg("here") + "</a>")?no_esc}
     </div>
   <#elseif section="socialProviders">
